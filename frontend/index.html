@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>School Student Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="header-content">
+        <h1>School Student Management System</h1>
+        <p>Manage student records easily and efficiently</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- ===================================================== -->
+    <!-- ADD STUDENT -->
+    <!-- ===================================================== -->
+
+    <section class="card">
+        <div class="section-heading">
+            <h2>Add Student</h2>
+            <p>Enter student details below.</p>
+        </div>
+
+        <form id="studentForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="studentId">Student ID</label>
+                    <input
+                        type="text"
+                        id="studentId"
+                        name="studentId"
+                        minlength="4"
+                        maxlength="10"
+                        placeholder="STU001"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Student Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        minlength="2"
+                        placeholder="Keerthivasan G"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input
+                        type="number"
+                        id="age"
+                        name="age"
+                        min="5"
+                        max="25"
+                        placeholder="15"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Gender</label>
+
+                    <div class="gender-options">
+                        <label>
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="Male"
+                            >
+                            Male
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="Female"
+                            >
+                            Female
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="Others"
+                            >
+                            Others
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="className">Class</label>
+
+                    <select id="className" name="className" required>
+                        <option value="">Select Class</option>
+                        <option value="1">Class 1</option>
+                        <option value="2">Class 2</option>
+                        <option value="3">Class 3</option>
+                        <option value="4">Class 4</option>
+                        <option value="5">Class 5</option>
+                        <option value="6">Class 6</option>
+                        <option value="7">Class 7</option>
+                        <option value="8">Class 8</option>
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                        <option value="11">Class 11</option>
+                        <option value="12">Class 12</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="section">Section</label>
+
+                    <select id="section" name="section" required>
+                        <option value="">Select Section</option>
+                        <option value="A">Section A</option>
+                        <option value="B">Section B</option>
+                        <option value="C">Section C</option>
+                        <option value="D">Section D</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="student@example.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        inputmode="numeric"
+                        pattern="[0-9]{10}"
+                        minlength="10"
+                        maxlength="10"
+                        placeholder="9876543210"
+                        required
+                    >
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="address">Address</label>
+
+                    <textarea
+                        id="address"
+                        name="address"
+                        rows="3"
+                        placeholder="Enter student address"
+                        required
+                    ></textarea>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Add Student
+                </button>
+
+                <button
+                    type="button"
+                    id="clearForm"
+                    class="secondary-button"
+                >
+                    Clear
+                </button>
+            </div>
+
+        </form>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- DASHBOARD -->
+    <!-- ===================================================== -->
+
+    <section class="dashboard-card">
+        <div>
+            <span class="dashboard-label">Total Students</span>
+            <strong id="studentCount">0</strong>
+        </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- EDIT STUDENT -->
+    <!-- ===================================================== -->
+
+    <section class="card edit-card">
+
+        <div
+            id="editTitle"
+            class="section-heading"
+            style="display: none;"
+        >
+            <h2>Edit Student</h2>
+            <p>Update the student information and save the changes.</p>
+        </div>
+
+        <form
+            id="editStudentForm"
+            style="display: none;"
+        >
+            <input type="hidden" id="editId">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="editStudentId">Student ID</label>
+
+                    <input
+                        type="text"
+                        id="editStudentId"
+                        minlength="4"
+                        maxlength="10"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="editName">Student Name</label>
+
+                    <input
+                        type="text"
+                        id="editName"
+                        minlength="2"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="editAge">Age</label>
+
+                    <input
+                        type="number"
+                        id="editAge"
+                        min="5"
+                        max="25"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Gender</label>
+
+                    <div class="gender-options">
+                        <label>
+                            <input
+                                type="radio"
+                                name="editGender"
+                                id="editMale"
+                                value="Male"
+                            >
+                            Male
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="editGender"
+                                id="editFemale"
+                                value="Female"
+                            >
+                            Female
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="editGender"
+                                id="editOthers"
+                                value="Others"
+                            >
+                            Others
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editClassName">Class</label>
+
+                    <select id="editClassName" required>
+                        <option value="">Select Class</option>
+                        <option value="1">Class 1</option>
+                        <option value="2">Class 2</option>
+                        <option value="3">Class 3</option>
+                        <option value="4">Class 4</option>
+                        <option value="5">Class 5</option>
+                        <option value="6">Class 6</option>
+                        <option value="7">Class 7</option>
+                        <option value="8">Class 8</option>
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                        <option value="11">Class 11</option>
+                        <option value="12">Class 12</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="editSection">Section</label>
+
+                    <select id="editSection" required>
+                        <option value="">Select Section</option>
+                        <option value="A">Section A</option>
+                        <option value="B">Section B</option>
+                        <option value="C">Section C</option>
+                        <option value="D">Section D</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="editEmail">Email</label>
+
+                    <input
+                        type="email"
+                        id="editEmail"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="editPhone">Phone</label>
+
+                    <input
+                        type="tel"
+                        id="editPhone"
+                        inputmode="numeric"
+                        pattern="[0-9]{10}"
+                        minlength="10"
+                        maxlength="10"
+                        required
+                    >
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="editAddress">Address</label>
+
+                    <textarea
+                        id="editAddress"
+                        rows="3"
+                        required
+                    ></textarea>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Update Student
+                </button>
+
+                <button
+                    type="button"
+                    id="cancelEdit"
+                    class="secondary-button"
+                >
+                    Cancel
+                </button>
+            </div>
+
+        </form>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- STUDENT LIST -->
+    <!-- ===================================================== -->
+
+    <section class="card">
+
+        <div class="section-heading">
+            <h2>Student Records</h2>
+            <p>Search, filter, sort, edit, delete, or export student data.</p>
+        </div>
+
+        <div class="download-actions">
+            <button
+                type="button"
+                id="downloadPdf"
+                class="download-button"
+            >
+                Download PDF
+            </button>
+
+            <button
+                type="button"
+                id="downloadExcel"
+                class="download-button"
+            >
+                Download Excel
+            </button>
+
+            <button
+                type="button"
+                id="downloadWord"
+                class="download-button"
+            >
+                Download Word
+            </button>
+        </div>
+
+        <div class="search-filter-row">
+
+            <div class="search-box">
+                <label for="searchInput">Search</label>
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search by Student ID or Name"
+                >
+            </div>
+
+            <div class="filter-box">
+                <label for="classFilter">Class Filter</label>
+
+                <select id="classFilter">
+                    <option value="">All Classes</option>
+                    <option value="1">Class 1</option>
+                    <option value="2">Class 2</option>
+                    <option value="3">Class 3</option>
+                    <option value="4">Class 4</option>
+                    <option value="5">Class 5</option>
+                    <option value="6">Class 6</option>
+                    <option value="7">Class 7</option>
+                    <option value="8">Class 8</option>
+                    <option value="9">Class 9</option>
+                    <option value="10">Class 10</option>
+                    <option value="11">Class 11</option>
+                    <option value="12">Class 12</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="table-wrapper">
+
+            <table id="studentTable">
+
+                <thead>
+                    <tr>
+                        <th data-sort="studentId">Student ID</th>
+                        <th data-sort="name">Name</th>
+                        <th data-sort="age">Age</th>
+                        <th>Gender</th>
+                        <th data-sort="className">Class</th>
+                        <th data-sort="section">Section</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="studentTableBody"></tbody>
+
+            </table>
+
+        </div>
+
+        <div
+            id="paginationContainer"
+            class="pagination"
+        ></div>
+
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <p>School Student Management System</p>
+    <p>Developed using HTML, CSS, JavaScript, Node.js, Express.js and MongoDB</p>
+</footer>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+></script>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"
+></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
